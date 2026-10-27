@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffcf33">
+  <meta name="description" content="Catálogo demostrativo de Kiosco Don Pepe. Productos y precios ficticios.">
+  <title>Kiosco Don Pepe | Tu kiosco de confianza</title>
+  <style>
+    :root{--yellow:#ffd43b;--orange:#ff6b35;--blue:#2463eb;--ink:#172033;--muted:#667085;--paper:#fffdf7;--line:#e9eaf0;--green:#159447}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#f6f7fb;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    .topbar{background:var(--ink);color:#fff;text-align:center;padding:9px 16px;font-size:.82rem}
+    header{background:var(--yellow);padding:18px 22px}
+    .head-inner{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
+    .logo{display:grid;place-items:center;width:52px;height:52px;border-radius:16px;background:#fff;font-size:29px;box-shadow:0 4px 0 #e9b91f}
+    .brand h1{font-size:1.28rem;margin:0;font-weight:900;letter-spacing:-.04em}
+    .brand p{margin:3px 0 0;font-size:.82rem;font-weight:650}
+    .cart-button{background:var(--ink);color:white;border:0;border-radius:14px;padding:12px 16px;font-weight:800;display:flex;align-items:center;gap:9px}
+    .count{display:grid;place-items:center;background:var(--yellow);color:var(--ink);width:25px;height:25px;border-radius:50%;font-size:.82rem}
+    main{max-width:1180px;margin:auto;padding:24px 20px 56px}
+    .hero{background:linear-gradient(115deg,#2463eb,#4d83ff);color:white;border-radius:26px;padding:clamp(24px,5vw,52px);display:grid;grid-template-columns:1.35fr .65fr;gap:24px;align-items:center;overflow:hidden;position:relative}
+    .eyebrow{display:inline-flex;background:#ffffff26;border:1px solid #ffffff55;border-radius:99px;padding:7px 11px;font-size:.78rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+    .hero h2{font-size:clamp(2rem,4.5vw,3.65rem);line-height:1.02;letter-spacing:-.055em;margin:16px 0}
+    .hero h2 span{color:var(--yellow)}
+    .hero p{color:#e8efff;max-width:500px;line-height:1.6;margin:0 0 22px}
+    .hero-cta{display:inline-block;text-decoration:none;background:var(--yellow);color:var(--ink);padding:13px 18px;border-radius:13px;font-weight:900}
+    .hero-art{font-size:clamp(5rem,11vw,9rem);text-align:center;filter:drop-shadow(0 14px 0 #163f9b);transform:rotate(5deg)}
+    .notice{font-size:.78rem;color:#fff;background:#102d75aa;border-radius:9px;padding:7px 10px;display:inline-block;margin-top:14px}
+    .tools{display:flex;gap:12px;margin:28px 0 18px;align-items:center}
+    .search-wrap{flex:1;position:relative}
+    .search-wrap span{position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:1.15rem}
+    .search{width:100%;padding:14px 16px 14px 45px;border:1px solid var(--line);border-radius:14px;background:white;outline:none}
+    .search:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2463eb20}
+    .sort{border:1px solid var(--line);border-radius:14px;background:white;padding:14px;max-width:190px;color:var(--ink)}
+    .section-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:24px 0 15px}
+    .section-heading h3{font-size:1.55rem;letter-spacing:-.04em;margin:0}
+    .section-heading p{margin:5px 0 0;color:var(--muted);font-size:.9rem}
+    .categories{display:flex;gap:9px;overflow:auto;padding:2px 0 12px;scrollbar-width:thin}
+    .chip{border:1px solid #e4e6ed;background:white;color:#475467;padding:10px 15px;border-radius:99px;white-space:nowrap;font-weight:750;font-size:.9rem}
+    .chip.active{background:var(--ink);border-color:var(--ink);color:white}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+    .product{background:white;border:1px solid #eceef3;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:transform .18s,box-shadow .18s}
+    .product:hover{transform:translateY(-3px);box-shadow:0 12px 28px #17203310}
+    .product-visual{height:150px;display:grid;place-items:center;position:relative;background:var(--tint,#fff2d5)}
+    .product-emoji{font-size:4.4rem;filter:drop-shadow(0 6px 4px #00000012)}
+    .tag{position:absolute;left:11px;top:11px;background:white;color:var(--ink);border-radius:8px;padding:5px 8px;font-size:.7rem;font-weight:900}
+    .product-info{padding:15px;display:flex;flex-direction:column;flex:1}
+    .category-label{color:var(--muted);font-size:.75rem;font-weight:750;text-transform:uppercase;letter-spacing:.05em}
+    .product h4{margin:6px 0 9px;font-size:1rem;line-height:1.25}
+    .product-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:12px}
+    .price{font-weight:950;font-size:1.12rem;letter-spacing:-.03em}
+    .add{border:0;border-radius:11px;background:var(--orange);color:white;font-weight:900;width:39px;height:39px;font-size:1.4rem;line-height:1}
+    .add:hover{background:#e95320}
+    .empty{grid-column:1/-1;text-align:center;background:white;border:1px dashed #cbd0dc;border-radius:18px;padding:42px 20px;color:var(--muted)}
+    .bottom-note{margin:22px 0 0;padding:15px 17px;background:#fff8dc;border:1px solid #f5e5a2;border-radius:14px;color:#725a00;font-size:.88rem;line-height:1.5}
+    footer{background:var(--ink);color:white;padding:28px 20px}
+    .footer-inner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    footer p{margin:4px 0;color:#c5ccdb;font-size:.85rem}
+    .overlay{position:fixed;inset:0;background:#10182880;z-index:10;opacity:0;pointer-events:none;transition:opacity .2s}
+    .overlay.open{opacity:1;pointer-events:auto}
+    .cart-panel{position:fixed;z-index:11;right:0;top:0;height:100dvh;width:min(440px,100%);background:white;display:flex;flex-direction:column;transform:translateX(102%);transition:transform .25s;box-shadow:-15px 0 45px #00000018}
+    .cart-panel.open{transform:translateX(0)}
+    .cart-head{padding:21px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+    .cart-head h3{margin:0;font-size:1.3rem}
+    .close{border:0;background:#f0f2f6;border-radius:10px;width:38px;height:38px;font-size:1.3rem}
+    .cart-items{overflow:auto;padding:16px 22px;flex:1}
+    .cart-empty{text-align:center;color:var(--muted);padding:55px 10px}
+    .cart-row{display:grid;grid-template-columns:48px 1fr auto;gap:11px;align-items:center;padding:13px 0;border-bottom:1px solid #f0f1f4}
+    .cart-icon{width:48px;height:48px;border-radius:12px;background:#fff2d5;display:grid;place-items:center;font-size:1.8rem}
+    .cart-row h4{font-size:.92rem;margin:0 0 4px}
+    .cart-row p{font-size:.82rem;color:var(--muted);margin:0}
+    .qty{display:flex;align-items:center;gap:8px;margin-top:7px}
+    .qty button{width:25px;height:25px;border:1px solid var(--line);background:white;border-radius:7px;font-weight:900}
+    .remove{border:0;background:none;color:#b42318;font-size:.76rem;padding:5px 0}
+    .cart-foot{border-top:1px solid var(--line);padding:18px 22px calc(20px + env(safe-area-inset-bottom))}
+    .total-line{display:flex;justify-content:space-between;font-weight:900;font-size:1.1rem;margin-bottom:14px}
+    .customer-name{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;margin-bottom:10px}
+    .whatsapp{width:100%;border:0;border-radius:13px;background:var(--green);color:white;padding:14px;font-weight:900;font-size:1rem}
+    .whatsapp:disabled{opacity:.45;cursor:not-allowed}
+    .cart-foot small{display:block;color:var(--muted);line-height:1.45;margin-top:10px}
+    .toast{position:fixed;z-index:20;bottom:20px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:white;border-radius:12px;padding:12px 17px;box-shadow:0 6px 24px #0002;opacity:0;pointer-events:none;transition:.2s;font-size:.9rem;white-space:nowrap}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{grid-template-columns:1.2fr .8fr}.product-visual{height:135px}}
+    @media(max-width:640px){.topbar{font-size:.75rem}.head-inner{gap:10px}.logo{width:45px;height:45px;font-size:25px}.brand{gap:9px}.brand h1{font-size:1.05rem}.brand p{font-size:.72rem}.cart-button{padding:9px 11px;font-size:.85rem}.cart-button .cart-text{display:none}header{padding:13px 15px}main{padding:17px 14px 38px}.hero{grid-template-columns:1fr;padding:26px 22px;border-radius:21px}.hero h2{font-size:2.45rem}.hero-art{display:none}.tools{flex-direction:column;align-items:stretch;margin:21px 0 15px}.sort{max-width:none;width:100%}.section-heading h3{font-size:1.35rem}.section-heading p{font-size:.82rem}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.product{border-radius:16px}.product-visual{height:118px}.product-emoji{font-size:3.5rem}.product-info{padding:11px}.product h4{font-size:.91rem}.price{font-size:1rem}.add{width:35px;height:35px}.tag{left:7px;top:7px;font-size:.65rem}.bottom-note{font-size:.8rem}.footer-inner{display:block}.footer-inner>div+div{margin-top:16px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="topbar">🎉 ¡Tu kiosco de confianza, a un clic de distancia!</div>
+  <header>
+    <div class="head-inner">
+      <a class="brand" href="#" aria-label="Kiosco Don Pepe, inicio">
+        <div class="logo">🛒</div>
+        <div><h1>Kiosco Don Pepe</h1><p>Lo rico, lo práctico, lo de siempre.</p></div>
+      </a>
+      <button class="cart-button" id="openCart" aria-label="Abrir carrito">
+        <span>🛍️</span><span class="cart-text">Mi carrito</span><span class="count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">¡Hola, vecino! 👋</span>
+        <h2>Tu antojo.<br><span>Lo tenemos.</span></h2>
+        <p>Encontrá tus favoritos, armá tu pedido y mandanoslo por WhatsApp. ¡Así de fácil!</p>
+        <a class="hero-cta" href="#catalogo">Ver productos ↓</a>
+        <div class="notice">Tienda de demostración · Productos y precios ficticios</div>
+      </div>
+      <div class="hero-art" aria-hidden="true">🥤🍪</div>
+    </section>
+
+    <section id="catalogo">
+      <div class="section-heading">
+        <div><h3>¿Qué se te antoja?</h3><p>Elegí tus productos favoritos.</p></div>
+      </div>
+      <div class="tools">
+        <div class="search-wrap"><span>🔎</span><input id="search" class="search" type="search" placeholder="Buscar productos..." aria-label="Buscar productos"></div>
+        <select id="sort" class="sort" aria-label="Ordenar productos">
+          <option value="featured">Orden recomendado</option>
+          <option value="low">Precio: menor a mayor</option>
+          <option value="high">Precio: mayor a menor</option>
+          <option value="az">Nombre: A a Z</option>
+        </select>
+      </div>
+      <nav class="categories" id="categories" aria-label="Categorías de productos"></nav>
+      <div class="grid" id="products" aria-live="polite"></div>
+      <div class="bottom-note">💡 <strong>Importante:</strong> esta es una muestra para presentar el funcionamiento de una tienda online. Los productos, precios, disponibilidad y pedidos son ficticios hasta que se personalice para un comercio real.</div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div><strong>🛒 Kiosco Don Pepe</strong><p>Siempre cerca de vos.</p></div>
+      <div><strong>¿Tenés alguna consulta?</strong><p>Prepará tu pedido y contactanos por WhatsApp.</p></div>
+      <div><p>© <span id="year"></span> Kiosco Don Pepe · Demo de muestra</p></div>
+    </div>
+  </footer>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart-panel" id="cartPanel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="cart-head"><h3 id="cartTitle">Tu pedido 🛍️</h3><button class="close" id="closeCart" aria-label="Cerrar carrito">×</button></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot">
+      <div class="total-line"><span>Total estimado</span><span id="total">$0</span></div>
+      <input class="customer-name" id="customerName" type="text" placeholder="Tu nombre (opcional)" maxlength="80" aria-label="Tu nombre">
+      <button class="whatsapp" id="sendOrder" disabled>Enviar pedido por WhatsApp ↗</button>
+      <small>Para activar el envío, reemplazá el número de ejemplo en el archivo <code>script.js</code> por el WhatsApp real del comercio, con código de país y área, sin + ni espacios. No se envía nada mientras no pulses el botón.</small>
+    </div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
